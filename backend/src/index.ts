@@ -37,6 +37,10 @@ app.get("/health", async (req: Request, res: Response) => {
   res.send({ message: "health OK!" });
 });
 
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+});
+
 const port = 7000;
 app.listen(port, () => {
   console.log(`Server listening on Port: ${port}`);
