@@ -7,6 +7,7 @@ import myRestaurantRoute from "./routes/myRestaurantRoute";
 import restaurantRoute from "./routes/restaurantRoute";
 import OrderRoute from "./routes/OrderRoute";
 import { v2 as cloudinary } from "cloudinary";
+import path from "path";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -24,6 +25,8 @@ app.use(cors());
 app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
 
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute);
